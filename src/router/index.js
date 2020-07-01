@@ -11,8 +11,8 @@ Vue.use(VueRouter)
 // 创建路由对象
 const router = new VueRouter({
   routes: [
-    { path: '/login', component: Login },
-    { path: '/register', component: Register }
+    { path: '/login', component: Login, name: 'login' },
+    { path: '/register', component: Register, name: 'register' }
   ]
 })
 
