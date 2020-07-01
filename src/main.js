@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { Button, Field, Search } from 'vant'
+import { Button } from 'vant'
 import 'amfe-flexible'
+import './style/base.css'
+import './style/iconfont.css'
+import router from './router' // 如果是index可以省略后面
 Vue.use(Button)
-Vue.use(Field)
-Vue.use(Search)
-
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App)
+  render: h => h(App),
+  router
 }).$mount('#app')
