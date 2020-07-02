@@ -10,12 +10,7 @@
 
     <!-- 表单 -->
     <van-form @submit="onSubmit" class="fromCont">
-      <van-field
-        v-model="username"
-        label="用户名"
-        placeholder="用户名"
-        :rules="rules.username"
-      />
+      <van-field v-model="username" label="用户名" placeholder="用户名" :rules="rules.username" />
       <van-field
         v-model="password"
         type="password"
@@ -24,21 +19,20 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit" class="login">
-          登录
-        </van-button>
+        <van-button round block type="info" native-type="submit" class="login">登录</van-button>
       </div>
     </van-form>
 
     <!-- 去注册 -->
-    <span class="goback"
-      >没有账号?去<router-link to="Register">注册</router-link></span
-    >
+    <span class="goback">
+      没有账号?去
+      <router-link to="Register">注册</router-link>
+    </span>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data() {
     return {
@@ -65,29 +59,26 @@ export default {
     }
   },
   created() {
-    // const { username, password } = this.$route.params
-    // this.username = username
-    // this.password = password
-    console.log(this.$route.params)
+    // 把传递过来的内容展示出来
     this.username = this.$route.params.username
     this.password = this.$route.params.password
   },
   methods: {
     async onSubmit() {
-      // const info = await this.$axios.post(this.baseUrl + '/login', {
-      //   username: this.username,
-      //   password: this.password
-      // })
-      // console.log(this.$axios, this.baseUrl)
-      const res = await axios.post('http://localhost:3000/login', {
+      // 发送axios请求
+      const res = await this.$axios.post(this.baseUrl + 'login', {
         username: this.username,
         password: this.password
       })
-      const { token } = res.data.data
 
       if (res.data.statusCode === 200) {
+        // 加载轻提示
         this.$toast('登录成功')
+        // 跳转到首页
         this.$router.push('/')
+        // 登录成功获取token
+        const { token } = res.data.data
+        // 把token添加到本地存储
         localStorage.setItem('token', token)
       } else {
         this.$toast('登录失败')

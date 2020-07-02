@@ -10,12 +10,7 @@
 
     <!-- 列表  -->
     <van-form @submit="onSubmit" class="fromCont">
-      <van-field
-        v-model="username"
-        label="用户名"
-        placeholder="用户名"
-        :rules="rules.username"
-      />
+      <van-field v-model="username" label="用户名" placeholder="用户名" :rules="rules.username" />
       <van-field
         v-model="nickname"
         type="nickname"
@@ -31,15 +26,14 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">
-          注册
-        </van-button>
+        <van-button round block type="info" native-type="submit">注册</van-button>
       </div>
     </van-form>
     <!-- 去注册 -->
-    <span class="goback"
-      >没有账号?去<router-link to="Login">登录</router-link></span
-    >
+    <span class="goback">
+      没有账号?去
+      <router-link to="Login">登录</router-link>
+    </span>
   </div>
 </template>
 
@@ -79,6 +73,7 @@ export default {
       }
     }
   },
+
   methods: {
     async onSubmit() {
       const res = await axios.post('http://localhost:3000/register', {
