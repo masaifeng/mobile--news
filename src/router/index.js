@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 // 引入文件
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import User from '../views/User.vue'
 // 把路由挂载到vue上面
 Vue.use(VueRouter)
 
@@ -12,7 +13,8 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes: [
     { path: '/login', component: Login, name: 'login' },
-    { path: '/register', component: Register, name: 'register' }
+    { path: '/register', component: Register, name: 'register' },
+    { path: '/user', component: User, name: 'user' }
   ]
 })
 

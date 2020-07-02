@@ -1,6 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { Button, Toast, NavBar, Form, Field } from 'vant'
+import {
+  Button,
+  Toast,
+  NavBar,
+  Form,
+  Field,
+  Divider,
+  Cell,
+  CellGroup,
+  Image as VanImage
+} from 'vant'
 import 'amfe-flexible'
 import './style/base.css'
 import './style/iconfont.css'
@@ -20,6 +30,10 @@ Vue.use(Field)
 Vue.use(Button)
 Vue.use(Toast)
 Vue.use(NavBar)
+Vue.use(Divider)
+Vue.use(Cell)
+Vue.use(CellGroup)
+Vue.use(VanImage)
 
 Vue.config.productionTip = false
 // 注册header为全局组件
