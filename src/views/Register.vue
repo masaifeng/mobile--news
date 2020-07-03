@@ -10,7 +10,12 @@
 
     <!-- 列表  -->
     <van-form @submit="onSubmit" class="fromCont">
-      <van-field v-model="username" label="用户名" placeholder="用户名" :rules="rules.username" />
+      <van-field
+        v-model="username"
+        label="用户名"
+        placeholder="用户名"
+        :rules="rules.username"
+      />
       <van-field
         v-model="nickname"
         type="nickname"
@@ -26,7 +31,9 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">注册</van-button>
+        <van-button round block type="info" native-type="submit"
+          >注册</van-button
+        >
       </div>
     </van-form>
     <!-- 去注册 -->
@@ -38,7 +45,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data() {
     return {
@@ -76,7 +82,7 @@ export default {
 
   methods: {
     async onSubmit() {
-      const res = await axios.post('http://localhost:3000/register', {
+      const res = await this.$axios.post(this.baseUrl + '/register', {
         username: this.username,
         password: this.password,
         nickname: this.nickname
@@ -92,7 +98,7 @@ export default {
           }
         })
       } else {
-        this.$toast.fail('注册失败')
+        this.$toast.fail(res.data.message)
       }
     }
   }

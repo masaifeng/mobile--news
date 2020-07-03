@@ -10,7 +10,12 @@
 
     <!-- 表单 -->
     <van-form @submit="onSubmit" class="fromCont">
-      <van-field v-model="username" label="用户名" placeholder="用户名" :rules="rules.username" />
+      <van-field
+        v-model="username"
+        label="用户名"
+        placeholder="用户名"
+        :rules="rules.username"
+      />
       <van-field
         v-model="password"
         type="password"
@@ -19,7 +24,9 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit" class="login">登录</van-button>
+        <van-button round block type="info" native-type="submit" class="login"
+          >登录</van-button
+        >
       </div>
     </van-form>
 
@@ -66,20 +73,21 @@ export default {
   methods: {
     async onSubmit() {
       // 发送axios请求
-      const res = await this.$axios.post(this.baseUrl + 'login', {
+      const res = await this.$axios.post(this.baseUrl + '/login', {
         username: this.username,
         password: this.password
       })
-
       if (res.data.statusCode === 200) {
         // 加载轻提示
         this.$toast('登录成功')
-        // 跳转到首页
-        this.$router.push('/')
         // 登录成功获取token
         const { token } = res.data.data
-        // 把token添加到本地存储
+        const loginId = res.data.data.user.id
+        // 把token和ID添加到本地存储
         localStorage.setItem('token', token)
+        // 跳转到首页
+        localStorage.setItem('loginId', loginId)
+        this.$router.push('/user')
       } else {
         this.$toast('登录失败')
       }
