@@ -9,8 +9,14 @@ import {
   Divider,
   Cell,
   CellGroup,
-  Image as VanImage
+  Image as VanImage,
+  Dialog,
+  RadioGroup,
+  Radio,
+  Uploader,
+  Overlay
 } from 'vant'
+
 import 'amfe-flexible'
 import './style/base.css'
 import './style/iconfont.css'
@@ -22,6 +28,8 @@ import axios from 'axios'
 // 引入user界面中的列表
 import userlist from './common/userList.vue'
 import moment from 'moment'
+
+// import VueCropper from 'vue-cropper'
 
 // 把axios挂载到vue上main
 Vue.prototype.$axios = axios
@@ -38,7 +46,9 @@ axios.interceptors.request.use(function(config) {
   }
   return config
 })
+
 Vue.use(Form)
+Vue.use(Uploader)
 Vue.use(Field)
 Vue.use(Button)
 Vue.use(Toast)
@@ -47,6 +57,10 @@ Vue.use(Divider)
 Vue.use(Cell)
 Vue.use(CellGroup)
 Vue.use(VanImage)
+Vue.use(Dialog)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(Overlay)
 
 // 定义过滤器
 Vue.filter('timeFil', function(input) {

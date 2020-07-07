@@ -9,13 +9,9 @@
     <div class="logo iconfont iconnew"></div>
 
     <!-- 表单 -->
-    <van-form @submit="onSubmit" class="fromCont">
-      <van-field
-        v-model="username"
-        label="用户名"
-        placeholder="用户名"
-        :rules="rules.username"
-      />
+    <!-- 表单 -->
+    <van-form @submit="onSubmit">
+      <van-field v-model="username" label="用户名" placeholder="用户名" :rules="rules.username" />
       <van-field
         v-model="password"
         type="password"
@@ -24,9 +20,7 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit" class="login"
-          >登录</van-button
-        >
+        <van-button round block type="info" native-type="submit">登录</van-button>
       </div>
     </van-form>
 
@@ -49,18 +43,18 @@ export default {
         username: [
           {
             pattern: /^\d{5,11}$/,
-            message: '用户名只能是5-11位数字',
+            required: true,
+            message: '请输入3-5个数字',
             trigger: 'onChange'
-          },
-          { trigger: 'onChange', required: true }
+          }
         ],
         password: [
           {
             pattern: /^\d{3,11}$/,
-            message: '用户名只能是3-11位数字',
+            required: true,
+            message: '请输入3-5个数字',
             trigger: 'onChange'
-          },
-          { trigger: 'onChange', required: true }
+          }
         ]
       }
     }
@@ -77,19 +71,21 @@ export default {
         username: this.username,
         password: this.password
       })
+      console.log(res)
+
       if (res.data.statusCode === 200) {
-        // 加载轻提示
-        this.$toast('登录成功')
         // 登录成功获取token
         const { token } = res.data.data
         const loginId = res.data.data.user.id
         // 把token和ID添加到本地存储
         localStorage.setItem('token', token)
-        // 跳转到首页
         localStorage.setItem('loginId', loginId)
+        // 加载轻提示
+        this.$toast.success(res.data.message)
+        // 跳转到首页
         this.$router.push('/user')
       } else {
-        this.$toast('登录失败')
+        this.$toast(res.data.message)
       }
     }
   }

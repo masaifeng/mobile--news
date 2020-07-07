@@ -27,7 +27,7 @@
     </div>
 
     <!-- user-list 信息列表 -->
-    <hm-userlist>
+    <hm-userlist @click="$router.push('/follows')">
       <template slot="title">我的关注</template>
       <template slot="tips">关注的用户</template>
     </hm-userlist>
@@ -39,8 +39,11 @@
       <template slot="title">我的收藏</template>
       <template slot="tips">文章/视频</template>
     </hm-userlist>
-    <hm-userlist @click="fn">
+    <hm-userlist @click="$router.push('/userEdit')">
       <template slot="title">设置</template>
+    </hm-userlist>
+    <hm-userlist @click="outin">
+      <template slot="title">退出</template>
     </hm-userlist>
   </div>
 </template>
@@ -50,8 +53,8 @@ export default {
   async created() {
     const id = localStorage.getItem('loginId')
     const res = await this.$axios.get(this.baseUrl + `/user/${id}`)
-    console.log(res)
     this.userData = res.data.data
+    console.log(123)
     // 拦截token失效的用户
     if (res.data.statusCode === 401) {
       // 清空token
@@ -67,8 +70,19 @@ export default {
     }
   },
   methods: {
-    fn() {
-      this.$router.push('/userEdit')
+    async outin() {
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '是否退出登录'
+        })
+      } catch {
+        this.$toast('取消退出')
+        return
+      }
+      localStorage.removeItem('token')
+      this.$router.push('/login')
+      this.$toast.success('退出成功')
     }
   }
 }
