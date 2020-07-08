@@ -7,19 +7,11 @@
     <!-- 头部部分 -->
     <div class="user-header" @click="$router.push('/userEdit')">
       <div class="user-img">
-        <van-image
-          round
-          width="70px"
-          height="70px"
-          :src="this.baseUrl + userData.head_img"
-        />
+        <van-image round width="70px" height="70px" :src="this.baseUrl + userData.head_img" />
       </div>
       <div class="msg">
-        <span
-          class="iconfont iconxingbienan"
-          v-if="userData.gender === 1"
-        ></span
-        >&nbsp; <span class="iconfont iconxingbienv" v-else></span>&nbsp;
+        <span class="iconfont iconxingbienan" v-if="userData.gender === 1"></span>&nbsp;
+        <span class="iconfont iconxingbienv" v-else></span>&nbsp;
         <span class="name">{{ userData.nickname }}</span>
         <p>{{ userData.create_date | timeFil }}</p>
       </div>
@@ -31,11 +23,11 @@
       <template slot="title">我的关注</template>
       <template slot="tips">关注的用户</template>
     </hm-userlist>
-    <hm-userlist>
+    <hm-userlist @click="$router.push('/comments')">
       <template slot="title">我的跟帖</template>
       <template slot="tips">跟帖/回复</template>
     </hm-userlist>
-    <hm-userlist>
+    <hm-userlist @click="$router.push('/userstar')">
       <template slot="title">我的收藏</template>
       <template slot="tips">文章/视频</template>
     </hm-userlist>

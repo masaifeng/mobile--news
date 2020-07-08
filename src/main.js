@@ -66,6 +66,14 @@ Vue.use(Overlay)
 Vue.filter('timeFil', function(input) {
   return moment(input).format('YYYY-MM-DD')
 })
+// 全局方法判断获取到的url是否带http
+Vue.prototype.pageUrl = function(data) {
+  if (data.startsWith('http')) {
+    return data
+  } else {
+    return this.baseUrl + data
+  }
+}
 
 Vue.config.productionTip = false
 // 全局组件

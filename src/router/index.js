@@ -8,6 +8,8 @@ import Register from '../views/Register.vue'
 import User from '../views/User.vue'
 import UserEdit from '../views/user_edit.vue'
 import Follows from '../views/follows.vue'
+import Userstar from '../views/userstar.vue'
+import Comments from '../views/comments.vue'
 // 把路由挂载到vue上面
 Vue.use(VueRouter)
 
@@ -18,7 +20,9 @@ const router = new VueRouter({
     { path: '/register', component: Register, name: 'register' },
     { path: '/user', component: User, name: 'user' },
     { path: '/userEdit', component: UserEdit, name: 'userEdit' },
-    { path: '/follows', component: Follows }
+    { path: '/follows', component: Follows },
+    { path: '/userstar', component: Userstar },
+    { path: '/comments', component: Comments }
   ]
 })
 // 添加路由守卫判断是否有token
