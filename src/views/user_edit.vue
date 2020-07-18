@@ -7,12 +7,7 @@
     <!-- 头部部分 -->
     <div class="user-header">
       <div class="user-img">
-        <van-image
-          round
-          width="70px"
-          height="70px"
-          :src="this.baseUrl + info.head_img"
-        />
+        <van-image round width="70px" height="70px" :src="this.baseUrl + info.head_img" />
         <van-uploader :after-read="afterRead" />
       </div>
     </div>
@@ -30,30 +25,15 @@
       <template slot="tips">{{ info.gender === 0 ? '女' : '男' }}</template>
     </hm-userlist>
     <!-- 昵称弹出 -->
-    <van-dialog
-      v-model="nickshow"
-      title="修改昵称"
-      show-cancel-button
-      @confirm="nickedit"
-    >
+    <van-dialog v-model="nickshow" title="修改昵称" show-cancel-button @confirm="nickedit">
       <van-field v-model="nickname" placeholder="请输入要修改的昵称" />
     </van-dialog>
     <!-- 密码弹出 -->
-    <van-dialog
-      v-model="pshow"
-      title="修改密码"
-      show-cancel-button
-      @confirm="pwredit"
-    >
+    <van-dialog v-model="pshow" title="修改密码" show-cancel-button @confirm="pwredit">
       <van-field v-model="password" placeholder="请输入要修改的密码" />
     </van-dialog>
     <!-- 性别选择弹出 -->
-    <van-dialog
-      v-model="gdshow"
-      title="修改性别"
-      show-cancel-button
-      @confirm="gdedit"
-    >
+    <van-dialog v-model="gdshow" title="修改性别" show-cancel-button @confirm="gdedit">
       <van-radio-group v-model="gender">
         <van-cell-group>
           <van-cell title="男" clickable @click="gender = 1">
@@ -122,12 +102,13 @@ export default {
       }
     },
     async getedit(data) {
-      const id = localStorage.getItem('userId')
+      const id = localStorage.getItem('loginId')
       const res = await this.$axios.post(
         this.baseUrl + `/user_update/${id}`,
         data
       )
       const { statusCode, message } = res.data
+      console.log(res)
       if (statusCode === 200) {
         this.gerAll()
       } else {

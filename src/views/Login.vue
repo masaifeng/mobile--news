@@ -82,8 +82,17 @@ export default {
         localStorage.setItem('loginId', loginId)
         // 加载轻提示
         this.$toast.success(res.data.message)
-        // 跳转到首页
-        this.$router.push('/user')
+        // 判断是否从文章详情页跳转过来
+        const post = localStorage.getItem('url')
+        if (post) {
+          // 跳转回去文章页面
+          this.$router.push(post)
+          // 清空数据
+          localStorage.removeItem('url')
+        } else {
+          // 跳转到首页
+          this.$router.push('/')
+        }
       } else {
         this.$toast(res.data.message)
       }
